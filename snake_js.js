@@ -99,7 +99,7 @@ function hitDetectionFruit(){
   for(var i = 0; i < spawnedFruit.length; i++){
     if(snake[0][0] === spawnedFruit[i][0] && snake[0][1] === spawnedFruit[i][1]){
       spawnedFruit.splice(i, 1);
-      snake.push([(snake[snake.length-1][0]) + 20, (snake[snake.length-1][1]) + 20]);
+      snake.push([snake[snake.length-1][0], snake[snake.length-1][1]]);
       snakeLength++;
     }
   }
