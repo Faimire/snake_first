@@ -10,7 +10,6 @@ function setup() {
   background(200);
   setTimeout(spawnFruit, 3000);
   init();
-  directionX = -1;
   frameRate(speed);
 }
 
@@ -18,6 +17,8 @@ function init(){
   snake = [];
   spawnedFruit = [];
   snakeLength = 10;
+  directionX = -1;
+  directionY = 0;
   for(var i = 0; i <= snakeLength; i++){
     snake.push([(400+(i*20)), 400]);
   }
@@ -90,7 +91,8 @@ function edge(){
 function hitDetectionSnake(){
   for(var i = 1; i < snakeLength + 1; i++){
     if(snake[0][0] === snake[i][0] && snake[0][1] === snake[i][1]){
-      snakeLength = "dead press enter to restart";
+      snakeLength = "dead";
+      setTimeout(init, 5000);
     }
   }
 }
@@ -99,7 +101,7 @@ function hitDetectionFruit(){
   for(var i = 0; i < spawnedFruit.length; i++){
     if(snake[0][0] === spawnedFruit[i][0] && snake[0][1] === spawnedFruit[i][1]){
       spawnedFruit.splice(i, 1);
-      snake.push([snake[snake.length-1][0], snake[snake.length-1][1]]);
+      snake.push([(snake[snake.length-1][0]) + 20, (snake[snake.length-1][1]) + 20]);
       snakeLength++;
     }
   }
@@ -135,9 +137,5 @@ function keyPressed(){
       directionX = -1;
     }
   }
-  if(snakeLength === "dead press enter to restart"){
-    if(keyCode === ENTER){
-      init();
-    }
-  }
+  
 }
