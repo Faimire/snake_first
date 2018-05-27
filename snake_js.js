@@ -3,7 +3,8 @@ var directionX = 0;
 var directionY = 0;
 var speed = 7;
 var snakeLength = 10;
-var spawnedFruit = []
+var spawnedFruit = [];
+var bug = 0;
 
 function setup() {
   createCanvas(800,800);
@@ -33,6 +34,7 @@ function spawnFruit(){
 }
   
 function update(){
+  bug = 0;
   background(200);  
   textSize(32);
   text(snakeLength.toString(), 400, 720);
@@ -44,8 +46,8 @@ function update(){
     fill('white');
     rect(snake[i][0], snake[i][1], 20, 20);
   }
-  snake.unshift([snake[0][0], snake[0][1]]);
   snake.pop();
+  snake.unshift([snake[0][0], snake[0][1]]);
   switch(directionX){
     case -1:
       snake[0][0] = snake[0][0] - 20;
@@ -113,28 +115,41 @@ function draw() {
   edge();
   hitDetectionSnake();
   hitDetectionFruit();
+  console.log(snake.toString());
 }
 
 function keyPressed(){
   if(keyCode === UP_ARROW){
     if(!directionX == 0){
-      directionY = 1;
-      directionX = 0;
+      if(bug === 0){
+        bug = 1;
+        directionY = 1;
+        directionX = 0;
+      }
     }
   } else if(keyCode === DOWN_ARROW){
     if(!directionX == 0){
-      directionY = -1;
-      directionX = 0;
+      if(bug === 0){
+        bug = 1;
+        directionY = -1;
+        directionX = 0;
+      }
     }
   } else if(keyCode === RIGHT_ARROW){
     if(!directionY == 0){
-      directionY = 0;
-      directionX = 1;
+      if(bug === 0){
+        bug = 1;
+        directionY = 0;
+        directionX = 1;
+      }
     }
   } else if(keyCode === LEFT_ARROW){
     if(!directionY == 0){
-      directionY = 0;
-      directionX = -1;
+      if(bug === 0){
+        bug = 1;
+        directionY = 0;
+        directionX = -1;
+      }
     }
   }
   
